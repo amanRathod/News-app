@@ -1,7 +1,7 @@
-import React from "react";
-import { useFormikContext } from "formik";
+import React from 'react';
+import { useFormikContext } from 'formik';
 
-import AppButton from "../AppButton";
+import AppButton from '../AppButton';
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ interface Props {
 function SubmitButton({ title }: Props) {
   const { handleSubmit } = useFormikContext();
 
-  return <AppButton title={title} onPress={handleSubmit} />;
+  return <AppButton title={title} onPress={handleSubmit} color={''} />;
 }
 
 export default SubmitButton;

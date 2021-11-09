@@ -7,8 +7,8 @@ import ErrorMessage from './ErrorMessage';
 export interface FormFieldProps {
   name: string;
   width: string;
-  onChangeText?: (text: string|number) => void;
-  value?: string|number;
+  onChangeText?: (text: string | number) => void;
+  value?: string | number;
   onBlur?: () => void;
   icon: string;
   secureTextEntry?: boolean;
@@ -18,33 +18,34 @@ export interface FormFieldProps {
   autoCorrect?: boolean;
   textContentType?: string;
   errors: {
-    name: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
   };
   values: {
-    name: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-  }
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  };
 }
 
-const FormField = ({name, width, ...otherProps}: FormFieldProps) => {
-  const { setFieldTouched, errors, touched, setFieldValue, values } = useFormikContext<FormFieldProps>();
+const FormField = ({ name, width, ...otherProps }: FormFieldProps) => {
+  const { setFieldTouched, errors, touched, setFieldValue, values } =
+    useFormikContext<FormFieldProps>();
   return (
     <>
-    <AppTextInput 
-      onBlur={() => setFieldTouched(name)}
-      onChangeText={(text: any) => setFieldValue(name, text)}
-      value={values[name]}
-      width={width}
-      {...otherProps}
-    />
-     <ErrorMessage error={errors[name]} visible={touched[name]} />
+      <AppTextInput
+        onBlur={() => setFieldTouched(name)}
+        onChangeText={(text: any) => setFieldValue(name, text)}
+        value={values[name]}
+        width={width}
+        {...otherProps}
+      />
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
-}
+};
 
 export default FormField;

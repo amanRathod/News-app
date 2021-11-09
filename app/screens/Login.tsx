@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, Image, View, Text } from "react-native";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { StyleSheet, Image, View, Text } from 'react-native';
+import * as Yup from 'yup';
 // import { Login } from "../api/auth";
 
-import Screen from "../components/Screen";
-import { ErrorMessage, Form, FormField, SubmitButton } from "../components/form";
+import Screen from '../components/Screen';
+import { ErrorMessage, Form, FormField, SubmitButton } from '../components/form';
 
 export interface LoginFormData {
   email: string;
@@ -12,8 +12,8 @@ export interface LoginFormData {
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
+  email: Yup.string().required().email().label('Email'),
+  password: Yup.string().required().min(4).label('Password'),
 });
 
 function LoginScreen() {
@@ -22,19 +22,17 @@ function LoginScreen() {
 
   const handleSubmit = async (data: LoginFormData) => {
     try {
-    
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/images/new.jpg")} />
-   
+      <Image style={styles.logo} source={require('../assets/images/new.jpg')} />
+
       <Form
-        InitialValues={{ email: "", password: "" }}
+        InitialValues={{ email: '', password: '' }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -47,7 +45,19 @@ function LoginScreen() {
           keyboardType="email-address"
           name="email"
           placeholder="Email"
-          textContentType="emailAddress" 
+          textContentType="emailAddress"
+          errors={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          values={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
         />
         <FormField
           autoCapitalize="none"
@@ -57,10 +67,22 @@ function LoginScreen() {
           name="password"
           placeholder="Password"
           secureTextEntry
-          textContentType="password" 
+          textContentType="password"
+          errors={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          values={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
         />
         <SubmitButton title="Login" />
-      </Form>     
+      </Form>
     </Screen>
   );
 }
@@ -72,7 +94,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 80,
     height: 80,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 50,
     marginBottom: 20,
   },

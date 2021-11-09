@@ -11,20 +11,24 @@ export interface ResetPasswordProps {
 }
 
 const validationSchema = Yup.object().shape({
-  password: Yup.string().required().min(4).label("Password"),
-  confirmPassword: Yup.string().required().min(4).label("Confirm Password").oneOf([Yup.ref('password'), null], "Passwords must match"),
+  password: Yup.string().required().min(4).label('Password'),
+  confirmPassword: Yup.string()
+    .required()
+    .min(4)
+    .label('Confirm Password')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 });
 
 const ResetPassword = () => {
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/images/new.jpg")} />
-    <Form 
-    InitialValues={{ password: "", confirmPassword: "" }}
-    onSubmit={(values) => console.log(values)}
-    validationSchema={validationSchema}
-    >
-     <FormField
+      <Image style={styles.logo} source={require('../assets/images/new.jpg')} />
+      <Form
+        InitialValues={{ password: '', confirmPassword: '' }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
+      >
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
           icon="lock"
@@ -33,6 +37,18 @@ const ResetPassword = () => {
           placeholder="Password"
           secureTextEntry
           textContentType="password"
+          errors={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          values={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
         />
         <FormField
           autoCapitalize="none"
@@ -43,12 +59,24 @@ const ResetPassword = () => {
           placeholder="Confirm Password"
           secureTextEntry
           textContentType="password"
+          errors={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          values={{
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
         />
-      <SubmitButton title="Submit" />
-    </Form>
+        <SubmitButton title="Submit" />
+      </Form>
     </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -57,7 +85,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 80,
     height: 80,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 50,
     marginBottom: 20,
   },

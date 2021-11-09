@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Formik } from 'formik'
+import { Formik } from 'formik';
 
 export interface FormProps {
   children: ReactNode;
@@ -8,13 +8,9 @@ export interface FormProps {
   InitialValues: any;
 }
 
-const Form = ({InitialValues, onSubmit, validationSchema, children}: FormProps) => {
+const Form = ({ InitialValues, onSubmit, validationSchema, children }: FormProps) => {
   return (
-    <Formik
-      initialValues={InitialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
+    <Formik initialValues={InitialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
       {() => children}
     </Formik>
   );
