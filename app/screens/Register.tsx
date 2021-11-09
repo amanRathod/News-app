@@ -1,14 +1,17 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
 import { Form, FormField, SubmitButton, ErrorMessage } from '../components/form';
+import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 export interface RegisterFormData {
   name: string;
   email: string;
   password: string;
+  color: string;
 }
 
 const validationSchema = Yup.object().shape({
@@ -17,7 +20,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label('Password'),
 });
 
-function RegisterScreen() {
+function RegisterScreen({ navigation }: any) {
   const [error, setError] = React.useState<string>('');
 
   const handleSubmit = async (data: RegisterFormData) => {
@@ -77,7 +80,6 @@ function RegisterScreen() {
             confirmPassword: '',
           }}
         />
-        fo
         <FormField
           autoCapitalize="none"
           autoCorrect={false}
@@ -102,6 +104,11 @@ function RegisterScreen() {
         />
         <SubmitButton title="Register" />
       </Form>
+      <TouchableOpacity>
+        <Text style={styles.login} onPress={() => navigation.navigate(routes.LOGIN)}>
+          Login
+        </Text>
+      </TouchableOpacity>
     </Screen>
   );
 }
@@ -116,6 +123,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 50,
     marginBottom: 20,
+  },
+  login: {
+    height: 30,
+    color: colors['primary'],
+    textAlign: 'center',
   },
 });
 

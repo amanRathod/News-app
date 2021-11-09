@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
-import { Form, FormField, SubmitButton } from '../components/form/index';
+import { Form, FormField, SubmitButton } from '../components/form';
+import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 export interface ForgotPasswordProps {
   email: string;
@@ -13,7 +15,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
 });
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }: any) => {
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require('../assets/images/new.jpg')} />
@@ -46,6 +48,11 @@ const ForgotPassword = () => {
         />
         <SubmitButton title="Send" />
       </Form>
+      <TouchableOpacity>
+        <Text style={styles.login} onPress={() => navigation.navigate(routes.LOGIN)}>
+          back to Login
+        </Text>
+      </TouchableOpacity>
     </Screen>
   );
 };
@@ -60,6 +67,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 50,
     marginBottom: 20,
+  },
+  login: {
+    height: 30,
+    color: colors['primary'],
+    textAlign: 'center',
   },
 });
 

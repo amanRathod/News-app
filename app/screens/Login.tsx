@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 // import { Login } from "../api/auth";
 
 import Screen from '../components/Screen';
 import { ErrorMessage, Form, FormField, SubmitButton } from '../components/form';
+import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 export interface LoginFormData {
   email: string;
@@ -16,7 +18,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label('Password'),
 });
 
-function LoginScreen() {
+function LoginScreen({ navigation }: any) {
   const [loginFailed, setLoginFailed] = useState(false);
   // const { logIn } = useAuth();
 
@@ -81,8 +83,21 @@ function LoginScreen() {
             confirmPassword: '',
           }}
         />
-        <SubmitButton title="Login" />
+        <TouchableOpacity>
+          <Text
+            style={styles.forgot_button}
+            onPress={() => navigation.navigate(routes.FORGOTPASSWORD)}
+          >
+            Forgot Password?
+          </Text>
+        </TouchableOpacity>
+        <SubmitButton title="Login" color="primary" />
       </Form>
+      <TouchableOpacity>
+        <Text style={styles.signup} onPress={() => navigation.navigate(routes.REGISTER)}>
+          SignUp
+        </Text>
+      </TouchableOpacity>
     </Screen>
   );
 }
@@ -97,6 +112,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 50,
     marginBottom: 20,
+  },
+  forgot_button: {
+    height: 30,
+    marginBottom: 30,
+    color: colors['primary'],
+    flexDirection: 'row',
+  },
+  signup: {
+    height: 30,
+    color: colors['primary'],
+    textAlign: 'center',
   },
 });
 
